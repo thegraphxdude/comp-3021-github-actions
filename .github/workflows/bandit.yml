@@ -1,10 +1,12 @@
 name: Bandit Scanner
 
 on:
-  push: null
-  pull_request: null
+  push:
+  pull_request:
 
-permissions: {}
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
   build:
@@ -21,3 +23,8 @@ jobs:
           level: high
           confidence: high
           exit_zero: true     
+
+      - name: Upload SARIF to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: results.sarif
