@@ -1,0 +1,21 @@
+name: Bandit Scanner
+
+on:
+  push: null
+  pull_request: null
+
+jobs:
+  build:
+    name: Bandit Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Run Bandit Scanner
+        uses: reactive-firewall/python-bandit-scan@v2.3
+        with: 
+          path: "."
+          level: high
+          confidence: high
+          exit_zero: true     
